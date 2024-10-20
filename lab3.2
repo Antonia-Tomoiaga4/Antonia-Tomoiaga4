@@ -1,0 +1,56 @@
+import java.util.*;
+
+public class vocala {
+    private String string;
+
+
+    public vocala(String str){
+        this.string = str;
+    }
+    public int nrVocale() {
+        int voc = 0;
+
+        for (int i = 0; i < string.length(); i++) {
+            char c = string.charAt(i);
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+                voc++;
+            }
+        }
+        return voc;
+    }
+
+    public int nrConsoane() {
+        int cons = 0;
+
+        for (int i = 0; i < string.length(); i++) {
+            char c = string.charAt(i);
+            if (Character.isLetter(c) && !(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')) {
+                cons++;
+            }
+        }
+        return cons;
+    }
+ public  void indexVoc(char c){
+        System.out.println("indecsi voacala: ");
+        for(int i=0;i<string.length();i++){
+            if(string.charAt(i)==c){
+                System.out.println(i+" ");
+            }
+        }
+ }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("string: ");
+        String input = scanner.nextLine();
+
+        vocala Vocala = new vocala(input);
+
+        int nrVocale = Vocala.nrVocale();
+        int nrConsoane = Vocala.nrConsoane();
+
+        System.out.println("Număr de vocale: " + nrVocale);
+        System.out.println("Număr de consoane: " + nrConsoane);
+        Vocala.indexVoc('a');
+    }
+}
+

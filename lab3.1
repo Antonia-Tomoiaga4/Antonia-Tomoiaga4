@@ -1,0 +1,61 @@
+import java.math.BigDecimal;
+import java.util.Random;
+
+public class Loterie {
+    public BigDecimal factorial(int  n) {
+        BigDecimal fact = BigDecimal.ONE;
+        for(int i=1;i<=n;i++){
+            fact=fact.multiply(BigDecimal.valueOf(i));
+        }
+        return fact;
+    }
+    public BigDecimal WinChance(int n , int k){
+        BigDecimal chance=factorial(n).divide(factorial(k).multiply(factorial(n-k)));
+        return chance;
+    }
+    public long extragere(int k, int n){
+        Random lot=new Random();
+        long rezultat=0L;
+
+        System.out.println("numere extrase:");
+        for(int i=0;i<k;i++){
+            int nr=lot.nextInt(n)+1;
+            System.out.print(nr+" ");
+            long masca=1L<<nr;
+            if((rezultat & masca)==0){
+                rezultat=rezultat | masca;
+
+            }
+        }
+        return rezultat;
+    }
+
+    public void afisareDescresc(long n){
+        System.out.println("loterie descrescatoare");
+        for(int i=49;i>=1;i--){
+            if((n & (1L<<i))!=0){
+                System.out.print(i+" ");
+            }
+        }
+        System.out.println();
+    }
+    public void afisareCresc(long n){
+        System.out.println("loterie crescatoare:");
+        for(int i=1;i<=49;i++){
+            if((n & (1L<<i))!=0){
+                System.out.print(i+" ");
+            }
+        }
+        System.out.println();
+    }
+public static void main(String[] args) {
+        Loterie loterie = new Loterie();
+        BigDecimal chance = loterie.WinChance(49,6);
+        System.out.println("sansele la loterie sunt 1 din " + chance );
+        long extragere=loterie.extragere(6,49);
+        System.out.println();
+        loterie.afisareCresc(extragere);
+        loterie.afisareDescresc(extragere);
+
+}
+}
